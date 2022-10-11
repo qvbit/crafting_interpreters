@@ -69,7 +69,14 @@ class Parser {
 
     private Expr assignment() {
         Expr expr = equality();
-        // TODO: implement this
+
+        if (match(EQUAL)) {
+            Token equals = previous();
+            Expr value = assignment();
+
+            
+        }
+
     }
 
     private Expr equality() {
@@ -139,6 +146,8 @@ class Parser {
         }
 
         if (match(IDENTIFIER)) {
+            // Note how we only store the variable indentifier and not the value (which we can look up in
+            // in the Environment anyways)
             return new Expr.Variable(previous());
         }
 
