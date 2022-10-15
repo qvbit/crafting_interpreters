@@ -1,0 +1,7 @@
+class Devon {
+    serveOn() {
+        return "Scones";
+    }
+}
+
+print Devon;

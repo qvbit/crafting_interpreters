@@ -55,6 +55,15 @@ public class Lox {
         // Stop if there was a syntax error
         if (hadError) return;
 
+        // Run the resolver to statically resolve each variable only once with this pass. This is to ensure
+        // that a variable in some block (assuming its not explicitly changed) can only refer to the same value
+        // and not dynamically change due to a change in some other scope.
+        Resolver resolver = new Resolver(interpreter);
+        resolver.resolve(statements);
+
+        // Stop if there was a resolution error
+        if (hadError) return;
+
         interpreter.interpret(statements);
 
     }
